@@ -111,44 +111,51 @@ public class MyActivity extends Activity {
 ### 5. 加入adapter (決定每行item的介面)
 
 ```java
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private String[] mDataset; //data set,可以用arraylist<Object>
+ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+        //Adapter class用於設定自身的adapter(customer view)
+        private List<String> mDataset;  //資料集
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView;
-        public ViewHolder(TextView v) {
-            super(v);
-            mTextView = v;
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            //ViewHolder class 主要是用於連接layout (每行item)
+            public TextView mTextView;
+            public ViewHolder(View v) {
+                super(v);
+                mTextView = (TextView)v.findViewById(R.id.textView);
+            }
+        }
+
+        public MyAdapter(List<String> myDataset) {
+            //constructors
+            mDataset = myDataset;
+        }
+
+        @Override
+        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.normal_item, parent, false);
+            ViewHolder vh = new ViewHolder(v);
+            return vh;
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder,final int position) {
+            //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
+            holder.mTextView.setText(mDataset.get(position));
+            if(isStagger)
+                holder.mTextView.setHeight(random(800,80));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDataset.size();
+        }
+
+        private int random(int max, int min){
+            Random r = new Random();
+            int i1 = r.nextInt((max-min)+min)+min;
+            return i1;
         }
     }
-
-	//constructor
-    public MyAdapter(String[] myDataset) {
-        mDataset = myDataset;
-    }
-
-	//新item
-    @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                               .inflate(R.layout.my_text_view, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-    }
-
-	//設定每項item內容或者參數
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataset[position]);
-
-    }
-	
-    @Override
-    public int getItemCount() {
-        return mDataset.length;
-    }
-}
 ```
 
 ### 6. 加入item點擊事件

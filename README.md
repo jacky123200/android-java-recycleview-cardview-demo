@@ -81,7 +81,34 @@ public class MyActivity extends Activity {
 }
 ```
 
-### 4. 加入adapter (決定每行item的介面)
+### 4. 加入normal_item.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/info_img"
+        android:layout_alignParentLeft="true"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/info_img"
+        android:layout_alignParentRight="true"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+```
+
+### 5. 加入adapter (決定每行item的介面)
 
 ```java
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -122,33 +149,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return mDataset.length;
     }
 }
-```
-
-### 5. 加入normal_item.xml
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_centerVertical="true"
-        android:id="@+id/info_img"
-        android:layout_alignParentLeft="true"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/info_img"
-        android:layout_alignParentRight="true"
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
 ```
 
 ### 6. 加入item點擊事件

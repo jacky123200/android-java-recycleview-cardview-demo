@@ -1,4 +1,4 @@
-# RecyclerView & CardView
+# RecyclerView & CardView Demo
 
 https://developer.android.com/training/material/lists-cards.html
 
@@ -124,7 +124,34 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 }
 ```
 
-### 5. 加入item點擊事件
+### 5. 加入normal_item.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/info_img"
+        android:layout_alignParentLeft="true"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/info_img"
+        android:layout_alignParentRight="true"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+```
+
+### 6. 加入item點擊事件
 加入到adapter中的onBindViewHolder 就可以做到item的點擊事件
 ```java
  @Override

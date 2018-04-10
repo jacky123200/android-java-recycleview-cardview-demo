@@ -111,83 +111,83 @@ public class MyActivity extends Activity {
 ### 5. 加入adapter (決定每行item的介面)
 
 ```java
- public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-        //Adapter class用於設定自身的adapter(customer view)
-        private List<String> mDataset;  //資料集
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+	//Adapter class用於設定自身的adapter(customer view)
+	private List<String> mDataset;  //資料集
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            //ViewHolder class 主要是用於連接layout (每行item)
-            public TextView mTextView;
-            public ViewHolder(View v) {
-                super(v);
-                mTextView = (TextView)v.findViewById(R.id.textView);
-            }
-        }
+	public class ViewHolder extends RecyclerView.ViewHolder {
+		//ViewHolder class 主要是用於連接layout (每行item)
+		public TextView mTextView;
+		public ViewHolder(View v) {
+			super(v);
+			mTextView = (TextView)v.findViewById(R.id.textView);
+		}
+	}
 
-        public MyAdapter(List<String> myDataset) {
-            //constructors
-            mDataset = myDataset;
-        }
+	public MyAdapter(List<String> myDataset) {
+		//constructors
+		mDataset = myDataset;
+	}
 
-        @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.normal_item, parent, false);
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
-        }
+	@Override
+	public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		View v = LayoutInflater.from(parent.getContext())
+				.inflate(R.layout.normal_item, parent, false);
+		ViewHolder vh = new ViewHolder(v);
+		return vh;
+	}
 
-        @Override
-        public void onBindViewHolder(ViewHolder holder,final int position) {
-            //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
-            holder.mTextView.setText(mDataset.get(position));
-            if(isStagger)
-                holder.mTextView.setHeight(random(800,80));
-        }
+	@Override
+	public void onBindViewHolder(ViewHolder holder,final int position) {
+		//當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
+		holder.mTextView.setText(mDataset.get(position));
+		if(isStagger)
+			holder.mTextView.setHeight(random(800,80));
+	}
 
-        @Override
-        public int getItemCount() {
-            return mDataset.size();
-        }
+	@Override
+	public int getItemCount() {
+		return mDataset.size();
+	}
 
-        private int random(int max, int min){
-            Random r = new Random();
-            int i1 = r.nextInt((max-min)+min)+min;
-            return i1;
-        }
-    }
+	private int random(int max, int min){
+		Random r = new Random();
+		int i1 = r.nextInt((max-min)+min)+min;
+		return i1;
+	}
+}
 ```
 
 ### 6. 加入item點擊事件
 加入到adapter中的onBindViewHolder 就可以做到item的點擊事件
 ```java
- @Override
-        public void onBindViewHolder(ViewHolder holder,final int position) {
-            //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
-            holder.mTextView.setText(mDataset.get(position));
-            if(isStagger)
-                holder.mTextView.setHeight(random(800,80));
+@Override
+public void onBindViewHolder(ViewHolder holder,final int position) {
+	//當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
+	holder.mTextView.setText(mDataset.get(position));
+	if(isStagger)
+		holder.mTextView.setHeight(random(800,80));
 
-            //item onClick event
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" click ",Toast.LENGTH_SHORT).show();
-                }
-            });
+	//item onClick event
+	holder.itemView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" click ",Toast.LENGTH_SHORT).show();
+		}
+	});
 
-            //item onLongClick event
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" long click ",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
-        }
+	//item onLongClick event
+	holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+		@Override
+		public boolean onLongClick(View view) {
+			Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" long click ",Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	});
+}
 ```
 
-### 7. 拖動和滑動刪除 - ItemTouchHelper
+### 7. 拖動和滑動刪除 - [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
 上下為拖動(drag) - 拖動
 ```java
 onMove(RecyclerView, ViewHolder, ViewHolder)
@@ -197,6 +197,7 @@ onMove(RecyclerView, ViewHolder, ViewHolder)
 onSwiped(ViewHolder, int)
 ```
 
+##
 
 # CardView
 [CardView](https://developer.android.com/reference/android/support/v7/widget/CardView.html)可以讓您跨平台以一致的外觀顯示卡片內部的資訊。CardView 小工具可以有陰影和圓形邊角。

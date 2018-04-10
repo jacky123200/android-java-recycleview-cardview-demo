@@ -22,3 +22,17 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:${LibVersion}'
 }
 ```
+
+2. Add recycle view to layout
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_my_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
+```

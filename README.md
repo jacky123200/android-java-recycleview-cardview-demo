@@ -187,6 +187,17 @@ public class MyActivity extends Activity {
         }
 ```
 
+### 7. 拖動和滑動刪除 - ItemTouchHelper
+上下為拖動(drag) - 拖動
+```java
+onMove(RecyclerView, ViewHolder, ViewHolder)
+```
+左右為滑動(swipe) - 滑動刪除
+```java
+onSwiped(ViewHolder, int)
+```
+
+
 # CardView
 [CardView](https://developer.android.com/reference/android/support/v7/widget/CardView.html)可以讓您跨平台以一致的外觀顯示卡片內部的資訊。CardView 小工具可以有陰影和圓形邊角。
 如要建立有陰影的卡片，請使用 card_view:cardElevation 屬性。

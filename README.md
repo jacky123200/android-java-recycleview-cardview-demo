@@ -188,7 +188,12 @@ public class MyActivity extends Activity {
 ```
 
 # CardView
-
+[CardView](https://developer.android.com/reference/android/support/v7/widget/CardView.html)可以讓您跨平台以一致的外觀顯示卡片內部的資訊。CardView 小工具可以有陰影和圓形邊角。
+如要建立有陰影的卡片，請使用 card_view:cardElevation 屬性。
+使用下列屬性可自訂 CardView 小工具的外觀：
++ 如果要在版面配置中設定圓角的半徑，請使用 card_view:cardCornerRadius 屬性。
++ 如果要在程式碼中設定圓角的半徑，請使用 CardView.setRadius 方法。
++ 如果要設定卡片的背景顏色，請使用 card_view:cardBackgroundColor 屬性。
 <img src="screenshots/cardviewlinearlayout.png" height="400"/>
 
 ## 程式碼

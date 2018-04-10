@@ -2,7 +2,7 @@
 
 https://developer.android.com/training/material/lists-cards.html
 
-## RecyclerView
+# RecyclerView
 RecyclerView 提供下列內建的版面配置管理員(layout manager)：
 
 + [LinearLayoutManager](https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html) 在垂直或水平捲動清單中顯示項目。
@@ -187,4 +187,46 @@ public class MyActivity extends Activity {
         }
 ```
 
-## CardView
+# CardView
+
+<img src="screenshots/cardviewlinearlayout.png" height="400"/>
+
+## 程式碼
+### 1. 在XML中加入CardView
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:srcCompat="@mipmap/ic_launcher"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
+```

@@ -35,10 +35,10 @@
                 android:text="RecycleView Staggered Grid Layout" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/btn_cardViewLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Card View Linear Layout" />
 
             <Button
                 android:id="@+id/button7"

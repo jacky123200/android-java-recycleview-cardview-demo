@@ -26,10 +26,12 @@ public class RecycleViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private int defaultSpanCount = 3;
-    private boolean isStagger=false;
+    private Boolean isStagger=false;
+    private Boolean isCardView=false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycleview);
 
@@ -38,6 +40,8 @@ public class RecycleViewActivity extends AppCompatActivity {
         // decide layout manager
         Intent intent = getIntent();
         String layoutManagerType = intent.getStringExtra("layoutmanager");
+        isCardView = intent.getBooleanExtra("isCardView",false);
+
         switch (layoutManagerType)
         {
             case "linearlayout":
@@ -63,51 +67,68 @@ public class RecycleViewActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
+    {
         //Adapter class用於設定自身的adapter(customer view)
         private List<String> mDataset;  //資料集
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder
+        {
             //ViewHolder class 主要是用於連接layout (每行item)
             public TextView mTextView;
-            public ViewHolder(View v) {
+            public ViewHolder(View v)
+            {
                 super(v);
                 mTextView = (TextView)v.findViewById(R.id.textView);
             }
         }
 
-        public MyAdapter(List<String> myDataset) {
+        public MyAdapter(List<String> myDataset)
+        {
             //constructors
             mDataset = myDataset;
         }
 
         @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.normal_item, parent, false);
+        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View v = null;
+            if(isCardView)
+            {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
+            }
+            else
+            {
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_item, parent, false);
+            }
             ViewHolder vh = new ViewHolder(v);
             return vh;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder,final int position) {
+        public void onBindViewHolder(ViewHolder holder,final int position)
+        {
             //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
             holder.mTextView.setText(mDataset.get(position));
             if(isStagger)
                 holder.mTextView.setHeight(random(800,80));
 
             //item onClick event
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view)
+                {
                     Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" click ",Toast.LENGTH_SHORT).show();
                 }
             });
 
             //item onLongClick event
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+            {
                 @Override
-                public boolean onLongClick(View view) {
+                public boolean onLongClick(View view)
+                {
                     Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" long click ",Toast.LENGTH_SHORT).show();
                     return false;
                 }
@@ -115,11 +136,13 @@ public class RecycleViewActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getItemCount() {
+        public int getItemCount()
+        {
             return mDataset.size();
         }
 
-        private int random(int max, int min){
+        private int random(int max, int min)
+        {
             Random r = new Random();
             int i1 = r.nextInt((max-min)+min)+min;
             return i1;

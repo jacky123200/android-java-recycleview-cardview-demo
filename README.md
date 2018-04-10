@@ -187,7 +187,31 @@ public void onBindViewHolder(ViewHolder holder,final int position) {
 }
 ```
 
-### 7. 拖動和滑動刪除 - [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
+### 7. 列表更新和動畫效果 [RecyclerView.Adapter](https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html)
+```java
+notifyItemChanged(int position, Object payload)
+notifyItemChanged(int position)
+notifyItemInserted(int position)
+notifyItemMoved(int fromPosition, int toPosition)
+notifyItemRangeChanged(int positionStart, int itemCount, Object payload)
+notifyItemRangeChanged(int positionStart, int itemCount)
+notifyItemRangeInserted(int positionStart, int itemCount)
+notifyItemRangeRemoved(int positionStart, int itemCount)
+notifyItemRemoved(int position)
+```
+
++ 刪除
+假如只調用notifyItemRemoved的話,刪除會出很多問題,比如:點擊刪除position = 1的Item,其實刪除的是下一個,所以需要這麼加上notifyItemRangeChanged來更新列表
+```java
+@Override
+public void onClick(View v) {
+	items.remove(position);
+	notifyItemRemoved(position);
+	notifyItemRangeChanged(position, getItemCount());
+}
+```
+
+### 8. 拖動和滑動刪除 - [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
 上下為拖動(drag) - 拖動
 ```java
 onMove(RecyclerView, ViewHolder, ViewHolder)

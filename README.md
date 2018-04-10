@@ -6,8 +6,8 @@ https://developer.android.com/training/material/lists-cards.html
 RecyclerView 提供下列內建的版面配置管理員(layout manager)：
 
 + [LinearLayoutManager](https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html) 在垂直或水平捲動清單中顯示項目。
-+ GridLayoutManager 會在網格中顯示項目。
-+ StaggeredGridLayoutManager 會在交錯網格中顯示項目。
++ [GridLayoutManager](https://developer.android.com/reference/android/support/v7/widget/GridLayoutManager.html) 會在網格中顯示項目。
++ [StaggeredGridLayoutManager](https://developer.android.com/reference/android/support/v7/widget/StaggeredGridLayoutManager.html) 會在交錯網格中顯示項目。
 
 ## Integration
 1. Add to gradle

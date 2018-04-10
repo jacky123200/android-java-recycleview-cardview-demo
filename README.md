@@ -235,3 +235,14 @@ public class MyActivity extends Activity {
     </LinearLayout>
 </android.support.v7.widget.CardView>
 ```
+
+### 2. 在activity中使用CardView,在adapter中onCreateViewHolder
+```java
+@Override
+	public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+	{
+		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
+		ViewHolder vh = new ViewHolder(v);
+		return vh;
+	}
+```

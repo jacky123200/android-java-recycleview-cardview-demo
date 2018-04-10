@@ -1,8 +1,8 @@
-# android-java-recycleview-cardview-demo
+# RecyclerView & CardView
 
 https://developer.android.com/training/material/lists-cards.html
 
-## Demo for recycle view and card view
+## RecyclerView
 RecyclerView 提供下列內建的版面配置管理員(layout manager)：
 
 + [LinearLayoutManager](https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html) 在垂直或水平捲動清單中顯示項目。
@@ -152,3 +152,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             });
         }
 ```
+
+## CardView

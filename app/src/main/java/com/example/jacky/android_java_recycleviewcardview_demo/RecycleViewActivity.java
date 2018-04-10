@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Jacky on 2018/4/10.
@@ -24,6 +25,8 @@ public class RecycleViewActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private int defaultSpanCount = 3;
+    private boolean isStagger=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -43,6 +46,7 @@ public class RecycleViewActivity extends AppCompatActivity {
                 mLayoutManager = new GridLayoutManager(this,defaultSpanCount);
                 break;
             case "staggeredgridlayout":
+                isStagger=true;
                 mLayoutManager = new StaggeredGridLayoutManager(defaultSpanCount,StaggeredGridLayoutManager.VERTICAL);
                 break;
         }
@@ -88,11 +92,19 @@ public class RecycleViewActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
             holder.mTextView.setText(mDataset.get(position));
+            if(isStagger)
+                holder.mTextView.setHeight(random(800,80));
         }
 
         @Override
         public int getItemCount() {
             return mDataset.size();
+        }
+
+        private int random(int max, int min){
+            Random r = new Random();
+            int i1 = r.nextInt((max-min)+min)+min;
+            return i1;
         }
     }
 }

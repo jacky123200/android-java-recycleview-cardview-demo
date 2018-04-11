@@ -214,10 +214,13 @@ public void onClick(View v) {
 ### 8. 拖動和滑動刪除 - [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
 <img src="screenshots/move_remove.gif" height="400"/>
 上下為拖動(drag) - 拖動
+
 ```java
 onMove(RecyclerView, ViewHolder, ViewHolder)
 ```
+
 左右為滑動(swipe) - 滑動刪除
+
 ```java
 onSwiped(ViewHolder, int)
 ```

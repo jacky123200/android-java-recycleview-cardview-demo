@@ -215,7 +215,7 @@ public void onClick(View v) {
 #### 可以用2個方法實現
 + 比較簡單的 [ItemTouchHelper.SimpleCallback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.SimpleCallback.html)
 <img src="screenshots/move_remove.gif" height="400"/>
-##### 程式碼
+#### 程式碼
 
 constructors
 
@@ -245,8 +245,6 @@ onMove(RecyclerView, ViewHolder, ViewHolder)
 ```java
 onSwiped(ViewHolder, int)
 ```
-
-+
 
 ##
 

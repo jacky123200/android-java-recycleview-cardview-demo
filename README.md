@@ -224,32 +224,20 @@ constructors
 ItemTouchHelper.SimpleCallback(int dragDirs, int swipeDirs)
 ```
 
-###### dragDirs
+###### dragDirs 決定拖動方向
 
 + ItemTouchHelper.UP
 + ItemTouchHelper.DOWN
 + ItemTouchHelper.LEFT
 + ItemTouchHelper.RIGHT
 
-###### swipeDirs
+###### swipeDirs 決定滑動方向
 + ItemTouchHelper.START
 + ItemTouchHelper.END
 
-上下左右拖動(drag) - 拖動
-
-```java
-onMove(RecyclerView, ViewHolder, ViewHolder)
-```
-
-左右為滑動(swipe) - 滑動刪除
-
-```java
-onSwiped(ViewHolder, int)
-```
-
 ```java
 ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT,ItemTouchHelper.START|ItemTouchHelper.END) {
-	@Override
+	@Override	//上下左右拖動(drag) - 拖動
 	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 		int fromPosition = viewHolder.getAdapterPosition();
 		int toPosition = target.getAdapterPosition();
@@ -257,7 +245,7 @@ ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouc
 		return true;
 	}
 
-	@Override
+	@Override	//左右為滑動(swipe) - 滑動刪除
 	public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 		int position = viewHolder.getAdapterPosition();
 		myDataset.remove(position);
@@ -269,7 +257,7 @@ ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mCallback);
 mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 ```
 
-##比較難但多選項的自定[ItemTouchHelper.Callback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
+## 比較難但多選項的自定[ItemTouchHelper.Callback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
 
 
 

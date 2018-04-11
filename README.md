@@ -212,8 +212,8 @@ public void onClick(View v) {
 ```
 
 ### 8. 拖動和滑動刪除 - [ItemTouchHelper](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
-#### 可以用2個方法實現
-## 比較簡單的 [ItemTouchHelper.SimpleCallback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.SimpleCallback.html)
+
+##  [ItemTouchHelper.SimpleCallback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.SimpleCallback.html)
 <img src="screenshots/move_remove.gif" height="400"/>
 
 #### 程式碼
@@ -256,9 +256,6 @@ ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouc
 ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(mCallback);
 mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 ```
-
-## 比較難但多選項的自定[ItemTouchHelper.Callback](https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.Callback.html)
-
 
 
 # CardView

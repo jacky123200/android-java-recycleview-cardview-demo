@@ -8,21 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Jacky on 2018/4/10.
  */
 
-public class RecycleViewActivity extends AppCompatActivity {
+public class RecycleViewActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -64,91 +57,16 @@ public class RecycleViewActivity extends AppCompatActivity {
             myDataset.add(Integer.toString(i));
         }
 
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(this, myDataset, isCardView, isStagger);
         mRecyclerView.setAdapter(mAdapter);
 
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>
-    {
-        //Adapter class用於設定自身的adapter(customer view)
-        private List<String> mDataset;  //資料集
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
 
-        public class ViewHolder extends RecyclerView.ViewHolder
-        {
-            //ViewHolder class 主要是用於連接layout (每行item)
-            public TextView mTextView;
-            public ViewHolder(View v)
-            {
-                super(v);
-                mTextView = (TextView)v.findViewById(R.id.textView);
-            }
-        }
-
-        public MyAdapter(List<String> myDataset)
-        {
-            //constructors
-            mDataset = myDataset;
-        }
-
-        @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-        {
-            View v = null;
-            if(isCardView)
-            {
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview, parent, false);
-            }
-            else
-            {
-                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_item, parent, false);
-            }
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder,final int position)
-        {
-            //當物件顯示於畫面時被調用，可利用此方法更新該物件之內容。
-            holder.mTextView.setText(mDataset.get(position));
-            if(isStagger)
-                holder.mTextView.setHeight(random(800,80));
-
-            //item onClick event
-            holder.itemView.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" click ",Toast.LENGTH_SHORT).show();
-                }
-            });
-
-            //item onLongClick event
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
-            {
-                @Override
-                public boolean onLongClick(View view)
-                {
-                    Toast.makeText(RecycleViewActivity.this,"Item "+mDataset.get(position)+" long click ",Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount()
-        {
-            return mDataset.size();
-        }
-
-        private int random(int max, int min)
-        {
-            Random r = new Random();
-            int i1 = r.nextInt((max-min)+min)+min;
-            return i1;
-        }
     }
 }

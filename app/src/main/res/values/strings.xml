@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">android-java-recycleview&amp;cardview-demo</string>
+    <string name="delete">DELETE</string>
 </resources>
